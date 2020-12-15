@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table,
+        td {
+            border: 1px solid black;
+        }
+
+        td input,
+        td button {
+            width: 97.5%;
+        }
+
+        td textarea {
+            width: 98%;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <h2>Moath Book Store</h2>
+
+    <p>Search, Lookup and Buy your intersted books quickly.</p>
+
+    <table style="width:33.33%">
+        <tr>
+            <td><input type="text" id="input-search" value="" placeholder="enter the topic you search for" /></td>
+            <td><button type="button" id="button-search">Search</button></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="input-lookup" value="" placeholder="enter the book id you look for" /></td>
+            <td><button type="button" id="button-lookup">Lookup</button></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="input-buy" value="" placeholder="enter the book id you want to buy" /></td>
+            <td><button type="button" id="button-buy">Buy</button></td>
+        </tr>
+        <tr>
+            <td colspan="2"><textarea id="output-result" rows="10"></textarea></td>
+        </tr>
+    </table>
+
+
+    <script>
+
+        $("#button-search").click(function () {
+            $.ajax({
+                url: "http://34.121.141.144/balancer_server/api.php/search/" + $("#input-search").val(),
+                dataType: 'json',
+                success: function (resp) {
+                    $("#output-result").val(JSON.stringify(resp));
+                }
+            });
+        });
+
+        $("#button-lookup").click(function () {
+            $.ajax({
+                url: "http://34.121.141.144/balancer_server/api.php/lookup/" + $("#input-lookup").val(),
+                dataType: 'json',
+                success: function (resp) {
+                    $("#output-result").val(JSON.stringify(resp));
+                }
+            });
+        });
+
+
+        $("#button-buy").click(function () {
+
+            $.ajax({
+                url: "http://35.224.11.162/balancer_server/api.php/buy/" + $("#input-buy").val(),
+                dataType: 'json',
+                success: function (resp) {
+                    $("#output-result").val(JSON.stringify(resp));
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
